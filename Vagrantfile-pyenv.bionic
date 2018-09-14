@@ -20,9 +20,10 @@ Vagrant.configure("2") do |config|
   
     pyenv.vm.provision "shell", inline: <<-SHELL
       echo "git cloning pyenv.git"
+      mkdir git; cd git
       git clone https://github.com/pauloditarso/pyenv.git --quiet
       if [ $? -ne 0 ]; then echo "[PYENV] error"; fi
-      chown -R vagrant.vagrant necos
+      chown -R vagrant.vagrant /home/vagrant/git 
 
       echo "apt upgrading"
       bash pyenv/apt.sh
