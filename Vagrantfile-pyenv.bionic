@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV["LC_ALL"] = "en_US.UTF-8"
+
+Vagrant.configure("2") do |config|
+  
+############### start pyenv block ###############
+  config.vm.define "pyenv" do |pyenv|
+    pyenv.vm.box = "ubuntu/bionic64"
+    pyenv.vm.hostname = 'pyenv'
+    #pyenv.vm.network "private_network", ip: "10.0.0.11"
+    pyenv.vm.network "public_network"
+
+    pyenv.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+      vb.cpus = "2"
+      #vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+    end
+  
+    pyenv.vm.provision "shell", inline: <<-SHELL
+      #echo "[NECOS] git cloning necos.git"
+      #git clone https://github.com/dcomp-leris/necos.git --quiet
+      #if [ $? -ne 0 ]; then echo "[NECOS] error"; fi
+      #chown -R vagrant.vagrant necos
+
+      echo "apt upgrading"
+      bash necos/vagrant/apt.sh
+
+    SHELL
+  end
+############### end pyenv block ###############
+
+end
