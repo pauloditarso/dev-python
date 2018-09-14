@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
       mkdir git; cd git
       git clone https://github.com/pauloditarso/pyenv.git --quiet
       if [ $? -ne 0 ]; then echo "[PYENV] error"; fi
-      chown -R vagrant.vagrant /home/vagrant/git 
+      cd ~
+      chown -R vagrant.vagrant git
 
       echo "apt upgrading"
       bash git/pyenv/apt.sh
