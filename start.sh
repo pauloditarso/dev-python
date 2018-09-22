@@ -4,7 +4,7 @@ sudo apt -qy install python3-venv >> python3-venv.log 2>> python3-venv-error.log
 
 sudo apt -qy install sqlite3 >> apt-sqlite3.log 2>> apt-sqlite3-error.log
 
-ln -s /vagrant/projects projects 
+sudo -i -u vagrant ln -s /vagrant/projects projects 
 
 mkdir logs
 mv *.log logs
