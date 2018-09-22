@@ -5,32 +5,32 @@ ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
   
-############### start pyenv block ###############
-  config.vm.define "pyenv" do |pyenv|
-    pyenv.vm.box = "ubuntu/bionic64"
-    pyenv.vm.hostname = 'pyenv'
-    #pyenv.vm.network "private_network", ip: "10.0.0.11"
-    pyenv.vm.network "public_network"
+############### start dev-python block ###############
+  config.vm.define "dev-python" do |dev-python|
+    dev-python.vm.box = "ubuntu/bionic64"
+    dev-python.vm.hostname = 'dev-python'
+    #dev-python.vm.network "private_network", ip: "10.0.0.11"
+    dev-python.vm.network "public_network"
 
-    pyenv.vm.provider "virtualbox" do |vb|
+    dev-python.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
       #vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
     end
   
-    pyenv.vm.provision "shell", inline: <<-SHELL
-      echo "git cloning pyenv.git"
+    dev-python.vm.provision "shell", inline: <<-SHELL
+      echo "git cloning dev-python.git"
       mkdir git; cd git
-      git clone https://github.com/pauloditarso/pyenv.git --quiet
-      if [ $? -ne 0 ]; then echo "[PYENV] error"; fi
+      git clone https://github.com/pauloditarso/dev-python.git --quiet
+      if [ $? -ne 0 ]; then echo "[DEV-PYTHON] error"; fi
       cd /home/vagrant
       chown -R vagrant.vagrant git
 
       echo "apt upgrading"
-      bash git/pyenv/apt.sh
+      bash git/dev-python/apt.sh
 
     SHELL
   end
-############### end pyenv block ###############
+############### end dev-python block ###############
 
 end
