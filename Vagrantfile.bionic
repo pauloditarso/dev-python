@@ -26,8 +26,8 @@ Vagrant.configure("2") do |config|
       cd /home/vagrant
       chown -R vagrant.vagrant git
 
-      echo "apt upgrading"
-      bash git/dev-python/apt.sh
+      echo "running start.sh"
+      bash git/dev-python/start.sh
 
     SHELL
   end
