@@ -7,18 +7,18 @@ Vagrant.configure("2") do |config|
   
 ############### start dev-python block ###############
   config.vm.define "python" do |python|
-    pythom.vm.box = "ubuntu/bionic64"
-    pythom.vm.hostname = 'dev-python'
-    #pythom.vm.network "private_network", ip: "10.0.0.11"
-    pythom.vm.network "public_network"
+    python.vm.box = "ubuntu/bionic64"
+    python.vm.hostname = 'dev-python'
+    #python.vm.network "private_network", ip: "10.0.0.11"
+    python.vm.network "public_network"
 
-    pythom.vm.provider "virtualbox" do |vb|
+    python.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
       #vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
     end
   
-    pythom.vm.provision "shell", inline: <<-SHELL
+    python.vm.provision "shell", inline: <<-SHELL
       echo "git cloning dev-python.git"
       mkdir git; cd git
       git clone https://github.com/pauloditarso/dev-python.git --quiet
